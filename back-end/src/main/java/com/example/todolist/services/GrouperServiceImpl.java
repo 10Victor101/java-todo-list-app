@@ -8,6 +8,8 @@ import com.example.todolist.repositories.GrouperRepository;
 import com.example.todolist.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class GrouperServiceImpl implements GrouperService {
     private final GrouperRepository grouperRepository;
@@ -19,7 +21,7 @@ public class GrouperServiceImpl implements GrouperService {
     }
 
     @Override
-    public GrouperResponseDTO createGroup(String name, long userId) {
+    public GrouperResponseDTO createGrouper(String name, long userId) {
         if (name == null || name.isEmpty()) {
             throw new IllegalArgumentException("Nome não informado.");
         }
@@ -32,5 +34,11 @@ public class GrouperServiceImpl implements GrouperService {
         grouperRepository.save(grouper);
 
         return new GrouperResponseDTO(grouper);
+    }
+
+    @Override
+    public List<Grouper> getGroupers(long userId) {
+        User user = userRepository.findUserById(userId).orElseThrow(() -> new UserNotFoundException("O usuário não foi encontrado para encontrar os grupos."));
+        return grouperRepository.findAllByUser(user);
     }
 }
