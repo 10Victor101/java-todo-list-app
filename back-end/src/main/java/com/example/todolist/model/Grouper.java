@@ -12,20 +12,20 @@ import org.hibernate.annotations.UpdateTimestamp;
 import java.time.Instant;
 
 @Entity
-@Table(name = "Users")
+@Table(name = "grouper")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @SoftDelete
-public class User {
+public class Grouper {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    @Column(unique = true)
-    private String email;
-    private String password;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
     @CreationTimestamp
     @Column(name = "created_at")
     private Instant createdAt;

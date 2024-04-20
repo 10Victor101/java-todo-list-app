@@ -27,7 +27,7 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public ResponseDTO register(String name, String email, String password) {
         if (name == null || email == null || password == null || name.isEmpty() || email.isEmpty() || password.isEmpty()) {
-            throw new IllegalArgumentException("Todos os campos (nome, e-mail e senha) são obrigatórios!");
+            throw new IllegalArgumentException("Todos os campos (nome, e-mail e senha) são obrigatórios.");
         }
 
         if (password.length() < 8) {
@@ -69,6 +69,6 @@ public class AuthServiceImpl implements AuthService {
         }
 
         String token = this.tokenService.generateToken(user);
-        return new AuthResponseDTO(user.getName(), token);
+        return new AuthResponseDTO(user, token);
     }
 }

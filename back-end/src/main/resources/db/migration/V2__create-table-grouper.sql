@@ -1,10 +1,10 @@
-CREATE TABLE users
+CREATE TABLE grouper
 (
     id         SERIAL PRIMARY KEY,
     name       VARCHAR(255) NOT NULL,
-    email      VARCHAR(255) NOT NULL UNIQUE ,
-    password   VARCHAR(255) NOT NULL,
+    user_id    SERIAL       NOT NULL,
     created_at TIMESTAMP    NOT NULL,
     updated_at TIMESTAMP    NOT NULL,
-    deleted    BOOLEAN
+    deleted    BOOLEAN,
+    FOREIGN KEY (user_id) REFERENCES users (id)
 );

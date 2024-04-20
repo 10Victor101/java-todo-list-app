@@ -1,4 +1,6 @@
 package com.example.todolist.dto.authDTO;
 
-public record AuthResponseDTO(String name, String token) {
+import com.example.todolist.model.User;
+
+public record AuthResponseDTO(User user, String token) {
 }
