@@ -26,7 +26,7 @@ public class GrouperServiceImpl implements GrouperService {
             throw new IllegalArgumentException("Nome não informado.");
         }
 
-        User user = userRepository.findUserById(userId).orElseThrow(() -> new UserNotFoundException("O usuário não foi encontrado para vincular ao grupo."));
+        User user = userRepository.findUserById(Long.valueOf(userId)).orElseThrow(() -> new UserNotFoundException("O usuário não foi encontrado para vincular ao grupo."));
 
         Grouper grouper = new Grouper();
         grouper.setName(name);
@@ -38,7 +38,7 @@ public class GrouperServiceImpl implements GrouperService {
 
     @Override
     public List<Grouper> getGroupers(String userId) {
-        User user = userRepository.findUserById(userId).orElseThrow(() -> new UserNotFoundException("O usuário não foi encontrado para encontrar os grupos."));
+        User user = userRepository.findUserById(Long.valueOf(userId)).orElseThrow(() -> new UserNotFoundException("O usuário não foi encontrado para encontrar os grupos."));
         return grouperRepository.findAllByUser(user);
     }
 

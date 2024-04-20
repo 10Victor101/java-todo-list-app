@@ -17,7 +17,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/grouper")
-@Tag(name = "Grupo Controller", description = "")
+@Tag(name = "Grouper Controller", description = "")
 public class GrouperController {
     final private GrouperService grouperService;
     final private TokenService tokenService;
