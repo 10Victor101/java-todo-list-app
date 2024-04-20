@@ -29,11 +29,11 @@ public class GrouperController {
 
     @PostMapping("")
     public ResponseEntity<?> createGrouper(@RequestHeader("Authorization") String authorization,
-                                         @RequestBody GrouperRequestDTO body) {
+                                           @RequestBody GrouperRequestDTO body) {
         try {
             String token = authorization.replace("Bearer ", "");
             String userId = tokenService.validateToken(token);
-            GrouperResponseDTO groupResponseDTO = grouperService.createGrouper(body.name(), Long.parseLong(userId));
+            GrouperResponseDTO groupResponseDTO = grouperService.createGrouper(body.name(), userId);
             return ResponseEntity.status(HttpStatus.CREATED).body(groupResponseDTO);
         } catch (IllegalArgumentException | GrouperAlreadyExistsException | UserNotFoundException e) {
             return ResponseEntity.badRequest().body(new ResponseDTO(e.getMessage()));
@@ -45,8 +45,18 @@ public class GrouperController {
         try {
             String token = authorization.replace("Bearer ", "");
             String userId = tokenService.validateToken(token);
-            List<Grouper> groupers = grouperService.getGroupers(Long.parseLong(userId));
+            List<Grouper> groupers = grouperService.getGroupers(userId);
             return ResponseEntity.status(HttpStatus.CREATED).body(groupers);
+        } catch (UserNotFoundException e) {
+            return ResponseEntity.badRequest().body(new ResponseDTO(e.getMessage()));
+        }
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<?> deleteGrouper(@PathVariable String id) {
+        try {
+            grouperService.deleteGrouper(id);
+            return ResponseEntity.ok().build();
         } catch (UserNotFoundException e) {
             return ResponseEntity.badRequest().body(new ResponseDTO(e.getMessage()));
         }

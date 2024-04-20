@@ -8,6 +8,9 @@ import java.util.List;
 
 @Service
 public interface GrouperService {
-    GrouperResponseDTO createGrouper(String name, long userId);
-    List<Grouper> getGroupers(long userId);
+    GrouperResponseDTO createGrouper(String name, String userId);
+
+    List<Grouper> getGroupers(String userId);
+
+    void deleteGrouper(String id);
 }

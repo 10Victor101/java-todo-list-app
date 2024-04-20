@@ -21,7 +21,7 @@ public class GrouperServiceImpl implements GrouperService {
     }
 
     @Override
-    public GrouperResponseDTO createGrouper(String name, long userId) {
+    public GrouperResponseDTO createGrouper(String name, String userId) {
         if (name == null || name.isEmpty()) {
             throw new IllegalArgumentException("Nome não informado.");
         }
@@ -37,8 +37,13 @@ public class GrouperServiceImpl implements GrouperService {
     }
 
     @Override
-    public List<Grouper> getGroupers(long userId) {
+    public List<Grouper> getGroupers(String userId) {
         User user = userRepository.findUserById(userId).orElseThrow(() -> new UserNotFoundException("O usuário não foi encontrado para encontrar os grupos."));
         return grouperRepository.findAllByUser(user);
+    }
+
+    @Override
+    public void deleteGrouper(String id){
+        grouperRepository.deleteById(id);
     }
 }
