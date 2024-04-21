@@ -1,4 +1,9 @@
 package com.example.todolist.dto.grupoDTO;
 
-public record GrouperRequestDTO(String name) {
+import io.swagger.v3.oas.annotations.media.Schema;
+
+public record GrouperRequestDTO(
+        @Schema(description = "Nome do agrupador", requiredMode = Schema.RequiredMode.REQUIRED)
+        String name
+) {
 }
