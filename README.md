@@ -1,6 +1,6 @@
 # Visão Geral
 
-Este projeto é o back-end de um aplicativo de lista de tarefas (todo list) desenvolvido utilizando Spring Boot como framework, Maven para gerenciamento de dependências e PostgreSQL como banco de dados relacional.
+Este projeto é o back-end de um aplicativo de lista de tarefas (todo list) desenvolvido utilizando Spring Boot como framework, Maven para gerenciamento de dependências e PostgreSQL como banco de dados relacional. Além disso, implementa autenticação JWT (JSON Web Token) para segurança da API.
 
 ## Requisitos
 
