@@ -32,8 +32,6 @@ spring.datasource.password=${DATABASE_PASSWORD}
 api.security.token.secret=${TOKEN_SECRET}
 ```
 
-Ou crie as váriaveis de ambiente
-
 ## Como compilar e executar a aplicação
 
 Configure as variaveis de ambiente
