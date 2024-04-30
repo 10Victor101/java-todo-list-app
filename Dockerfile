@@ -1,4 +1,4 @@
-FROM maven:3.8.4-jdk-17 as build
+FROM maven:3.8.4-openjdk-17-slim as build
 
 COPY src /app/src
 COPY pom.xml /app
