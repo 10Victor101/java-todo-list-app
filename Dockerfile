@@ -1,4 +1,4 @@
-FROM maven:3.8.4-jdk-8 as build
+FROM maven:3.8.4-jdk-17 as build
 
 COPY src /app/src
 COPY pom.xml /app
@@ -6,7 +6,7 @@ COPY pom.xml /app
 WORKDIR /app
 RUN mvn clean install
 
-FROM openjdk:8-jre-alpine
+FROM openjdk:17-jre-alpine
 
 COPY --from=build /app/target/todo-list-0.0.1-SNAPSHOT.jar /app/app.jar
 
