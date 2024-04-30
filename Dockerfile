@@ -1,10 +1,11 @@
-FROM maven:3.8.4-openjdk-17-slim as build
+FROM maven:3.8.4-openjdk-17 as build
 
 COPY src /app/src
 COPY pom.xml /app
 
 WORKDIR /app
-RUN mvn clean install
+
+RUN mvn clean install -e
 
 FROM openjdk:17-oraclelinux8
 
