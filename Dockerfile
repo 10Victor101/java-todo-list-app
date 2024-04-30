@@ -1,11 +1,19 @@
-# Use uma imagem base do OpenJDK
-FROM openjdk:11-jre-slim
+FROM maven:3.8.4-jdk-8 as build
 
-# Defina o diretório de trabalho dentro do contêiner
+COPY src /app/src
+COPY pom.xml /app
+
+WORKDIR /app
+RUN mvn clean install
+
+COPY --from=build /app/target/todo-list-0.0.1-SNAPSHOT.jar /app/app.jar
+
+FROM openjdk:8-jre-alpine
+
+COPY --from=build /app/target/todo-list-0.0.1-SNAPSHOT.jar /app/app.jar
+
 WORKDIR /app
 
-# Copie o JAR da sua aplicação Spring Boot para o contêiner
-COPY target/build/todolist.jar /app/todolist.jar
+EXPOSE 8080
 
-# Defina o comando de execução da aplicação
-CMD ["java", "-jar", "todolistc.jar"]
+CMD ["java", "-jar", "app.jar"]
